@@ -18,8 +18,8 @@ this program will display the factorial of that number.
 
 int main(void) {
 
-	int n,i,fact=1;
-
+	int n,i;
+double fact=1;
 	printf("Enter an integer: ");
 	fflush(stdout);
 	scanf("%d",&n);
@@ -30,7 +30,7 @@ int main(void) {
 		{
 			fact *= i;
 		}
-		printf("%d Factorial = %d ",n,fact);
+		printf("%d Factorial = %lf ",n,fact);
 
 	}else if(n==0)
 	{
