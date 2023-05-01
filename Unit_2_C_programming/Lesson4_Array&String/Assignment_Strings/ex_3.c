@@ -6,8 +6,7 @@
  Copyright   :
  Description : Hello World in C, Ansi-style
  ============================================================================
-You can use standard library function strlen() to find the length of a string
-but, this program computes the length of a string manually without using strlen() funtion.
+Reverse a string
  ============================================================================
  */
 
