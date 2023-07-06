@@ -11,12 +11,11 @@ int main ()
 	setvbuf(stdout, NULL, _IONBF, 0);
 	setvbuf(stderr, NULL, _IONBF, 0);
 
-	int array_length,i,*p_arr=NULL;
+	int array_length,arr[15],i,*p_arr=NULL;
 
 	printf ("Enter the number of elements to store in the array (max 15) : ");
 	scanf("%d",&array_length);
 
-	int arr[array_length];
 
 	printf ("\nEnter %d elements in the array :\n",array_length);
 	for(i=0 ; i<array_length ;i++)
