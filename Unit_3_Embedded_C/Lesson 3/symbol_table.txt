@@ -1,0 +1,51 @@
+The symbols for each object 
+and the final executable
+
+main.o:
+
+00000000 R const_char
+00000004 D g_char
+000000bc T H_Fault_Handler
+00000000 T main
+000000b0 T NMI_Handler
+00000000 D R_ODR
+         U Reset_Handler
+
+startup.o:
+
+         U _E_bss
+         U _E_data
+         U _E_text
+         U _S_bss
+         U _S_data
+         U _stack_top
+000000b0 W Bus_Fault
+000000b0 T Default_Handler
+000000b0 W H_Fault_Handler
+         U main
+000000b0 W MM_Fault_Handler
+000000b0 W NMI_Handler
+00000000 T Reset_Handler
+000000b0 W Usage_Fault_Handler
+00000000 D vectors
+
+lab_2_Cortex_M3.elf:
+
+20000008 B _E_bss
+20000008 D _E_data
+080001a4 T _E_text
+20000008 B _S_bss
+20000000 D _S_data
+20001008 B _stack_top
+08000194 W Bus_Fault
+080001a0 T const_char
+08000194 T Default_Handler
+20000004 D g_char
+080000d8 T H_Fault_Handler
+0800001c T main
+08000194 W MM_Fault_Handler
+080000cc T NMI_Handler
+20000000 D R_ODR
+080000e4 T Reset_Handler
+08000194 W Usage_Fault_Handler
+08000000 T vectors
