@@ -5,7 +5,6 @@
  *      Author: Mohamed Nabil
  *
  *      Application code example to test linked list database driver
- *		The only limit to students Number is the size of the heap section
  */
 
 #include"linked_list_database.h"

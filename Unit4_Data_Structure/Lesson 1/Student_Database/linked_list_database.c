@@ -47,8 +47,7 @@ void Add_Student(){
 	if(!gpFirstStudent){
 		pNewStudent =(Snode_t*)malloc(sizeof(Snode_t));
 		gpFirstStudent = pNewStudent;
-		gpFirstStudent->pNextStudent = NULL;
-		pLastStudent = gpFirstStudent ;
+		pNewStudent->pNextStudent = NULL;
 	}else{
 
 		//Navigate to the last record
@@ -61,7 +60,8 @@ void Add_Student(){
 		pLastStudent->pNextStudent = pNewStudent ;
 		pNewStudent->pNextStudent = NULL;
 	}
-	//Get student Data
+
+	//Get student Data and test id existence
 	if(Fill_the_record(pNewStudent) == failed){
 
 		//delete record
@@ -104,7 +104,12 @@ void Delete_Student(){
 				else
 					gpFirstStudent = pSelectedStudent->pNextStudent;
 
-				free((Snode_t*)pSelectedStudent);
+				//Clean the id
+				pPreviousStudent->student.ID = 0;
+				//free Previous record
+				free((Snode_t*)pPreviousStudent);
+
+				//inform the user of process success
 				printf("\n=== student Data deleted successfully ===");
 			}
 
@@ -159,6 +164,8 @@ void Delete_All_Students(){
 
 		Snode_t* pCurrentStudent = gpFirstStudent;
 
+		gpFirstStudent->pNextStudent=NULL;
+		gpFirstStudent = NULL;
 
 		while(pCurrentStudent){
 
@@ -168,11 +175,13 @@ void Delete_All_Students(){
 			//move current pointer to next record
 			pCurrentStudent = pCurrentStudent->pNextStudent;
 
+			//Clean the id
+			pPreviousStudent->student.ID = 0;
 			//free Previous record
 			free((Snode_t*)pPreviousStudent);
 		}
 
-		gpFirstStudent = NULL;
+
 
 		printf("\n       === Database Is Cleaned ===");
 		printf("\n=== All Students Data Were Removed ===");
@@ -312,40 +321,50 @@ void Get_Nth_From_End(){
 
 		//required variables
 		char temp_cahr[40];
-		uint32_t i,count = 1 , selected_index;
+		uint32_t i,count = 1 ,Num =0, selected_index;
 
 		Snode_t* pFront = gpFirstStudent;
 		Snode_t* pBack = gpFirstStudent;
-
+		Snode_t* pTemp = gpFirstStudent;
 
 		//ask user for index
 		printf("\n Enter student order (index) : ");
 		gets(temp_cahr);
 		selected_index = atoi(temp_cahr);
 
-		for(i=1;i<selected_index;i++){
+		//get total number of students
+		while(pTemp){
 
-			if(pFront){
-				pFront = pFront->pNextStudent;
-				count++;
+			//increase count
+			Num++;
+
+			//move to next record
+			pTemp = pTemp->pNextStudent;
+
+		}
+		if(selected_index <= Num && selected_index > 0){
+
+			//add distance between two pointers
+			for(i=1;i<selected_index;i++){
+
+				if(pFront){
+					pFront = pFront->pNextStudent;
+					count++;
+				}
 			}
 
-		}
+			//Navigate on all records to find record with given index
+			while(pFront->pNextStudent){
 
-		//Navigate on all records to find record with given index
-		while(pFront->pNextStudent){
+				pFront = pFront->pNextStudent;
+				pBack = pBack->pNextStudent;
 
-			pFront = pFront->pNextStudent;
-			pBack = pBack->pNextStudent;
-
-		}
-
-		if(pFront){
+			}
 
 			printf("\n === Student Found ===\n");
 			Print_Data_Of(pBack,count);
-		}else
-			printf("\n === Wrong index ===");
+
+		}else printf("\n === Wrong index ===");
 
 	}
 
@@ -382,8 +401,14 @@ void Reverse_Students(){
 
 			}else{
 
+				if(pPreviousStudent == gpFirstStudent)
+					pPreviousStudent->pNextStudent = NULL;
+
+				//make the end the beginning
+				gpFirstStudent = pCurrentStudent;
+
+				//reverse
 				pCurrentStudent->pNextStudent = pPreviousStudent;
-				gpFirstStudent=pCurrentStudent;
 
 				break;
 			}
