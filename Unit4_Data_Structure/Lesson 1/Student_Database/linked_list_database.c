@@ -105,9 +105,9 @@ void Delete_Student(){
 					gpFirstStudent = pSelectedStudent->pNextStudent;
 
 				//Clean the id
-				pPreviousStudent->student.ID = 0;
+				pSelectedStudent->student.ID = 0;
 				//free Previous record
-				free((Snode_t*)pPreviousStudent);
+				free((Snode_t*)pSelectedStudent);
 
 				//inform the user of process success
 				printf("\n=== student Data deleted successfully ===");
