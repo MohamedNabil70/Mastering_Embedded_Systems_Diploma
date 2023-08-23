@@ -385,6 +385,11 @@ void Reverse_Students(){
 
 		while(pCurrentStudent){
 
+			//check if database has only one record
+			if(!(gpFirstStudent->pNextStudent))
+				break;
+
+
 			pCurrentStudent = pTemp;
 			pTemp = pTemp->pNextStudent;
 
