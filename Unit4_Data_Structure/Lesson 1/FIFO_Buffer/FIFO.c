@@ -118,7 +118,7 @@ void FIFO_print_items(FIFO_Buf_t* fifo){
 		printf("\n======= FIFO PRINT =======\n");
 	for(c=0; c < fifo->Count ;c++){
 		//circular Buffer
-		if(fifo->Tail == (fifo->Base + (fifo->Length) * sizeof(item_type) ) ){
+		if( temp == (fifo->Base + (fifo->Length) * sizeof(item_type) ) ){
 			//place temp pointer at base first then get the item
 			temp = fifo->Base;
 			printf("\nitem #%d: %d \n",c+1,*temp);
