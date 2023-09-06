@@ -1,0 +1,8 @@
+1 Mohamed Nabil 3.9 10 2 3 4 5 6 7 8 
+1 Yasser Samy 4.0 7 2 3 4 5
+2 Ahmed Adel 2.4 7 2 8 4 5
+3 Samy El-Barody 3.5 1 2 3 4 5
+4 Mostafa Lotfy 4.0 1 2 3 4 5
+5 Yousef Khalid 3.8 10 20 30 40 50
+5 Sara Ahmed 3.6 10 80 90 40 50
+6 Ramy Malek 3.0 10 20 30 40 50
