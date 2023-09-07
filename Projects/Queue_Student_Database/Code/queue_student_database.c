@@ -766,21 +766,21 @@ Check_status Fill_the_record(sDataBlock* newStudent){
 		return FALSE;
 
 	else{
-		printf("\nEnter The First Name Of Student : ");
+		printf("Enter The First Name Of Student : ");
 		gets(newStudent->fname);
 
-		printf("\nEnter The Last Name Of Student : ");
+		printf("Enter The Last Name Of Student : ");
 		gets(newStudent->lname);
 
-		printf("\nEnter The GPA Of Student: ");
+		printf("Enter The GPA Of Student: ");
 		gets(temp_char);
 		newStudent->GPA = atof(temp_char);
 
-		printf("\nEnter The Course ID Of Each Course ");
+		printf("\nEnter The Course ID Of Each Course\n");
 
 		for(i=0;i<5;i++){
 
-			printf("\nCourse %d ID: ",(i+1));
+			printf("Course %d ID: ",(i+1));
 			gets(temp_char);
 			newStudent->cid[i] = atoi(temp_char);
 
