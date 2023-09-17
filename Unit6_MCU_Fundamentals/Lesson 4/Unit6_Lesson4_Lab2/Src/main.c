@@ -25,7 +25,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef volatile unsigned int vuint32_t ;
 
 // Register addresses
 
