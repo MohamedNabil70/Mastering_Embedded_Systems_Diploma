@@ -1,0 +1,189 @@
+
+Task_3_AMIT_Kit_LEDs.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000dc  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000130  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000130  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000160  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000028  00000000  00000000  0000019c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000670  00000000  00000000  000001c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000005bb  00000000  00000000  00000834  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000029e  00000000  00000000  00000def  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000034  00000000  00000000  00001090  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000037f  00000000  00000000  000010c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000007e  00000000  00000000  00001443  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000018  00000000  00000000  000014c1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 3b 00 	call	0x76	; 0x76 <main>
+  64:	0c 94 6c 00 	jmp	0xd8	; 0xd8 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <DIO_init>:
+}
+
+void DIO_init(void){
+	
+	//Port C select all pins mode (OUTPUT)
+	DDRC = 0XFF;	
+  6c:	8f ef       	ldi	r24, 0xFF	; 255
+  6e:	84 bb       	out	0x14, r24	; 20
+	//Port D select all pins mode 
+	DDRD = 0b11111000;
+  70:	88 ef       	ldi	r24, 0xF8	; 248
+  72:	81 bb       	out	0x11, r24	; 17
+  74:	08 95       	ret
+
+00000076 <main>:
+//main
+int main(void)
+{
+    u8 state = 7;
+	
+	DIO_init();
+  76:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_init>
+
+
+//main
+int main(void)
+{
+    u8 state = 7;
+  7a:	87 e0       	ldi	r24, 0x07	; 7
+	
+	//PROGRAM INFINITE LOOP
+	 while(1)
+	 {
+	
+		if ( GET_BIT(PIND,0) == 1)
+  7c:	80 9b       	sbis	0x10, 0	; 16
+  7e:	22 c0       	rjmp	.+68     	; 0xc4 <main+0x4e>
+		{
+		
+		
+		if (state > 3)
+  80:	84 30       	cpi	r24, 0x04	; 4
+  82:	e0 f0       	brcs	.+56     	; 0xbc <main+0x46>
+		{
+
+			SET_BIT(PORTD,state);
+  84:	92 b3       	in	r25, 0x12	; 18
+  86:	21 e0       	ldi	r18, 0x01	; 1
+  88:	30 e0       	ldi	r19, 0x00	; 0
+  8a:	08 2e       	mov	r0, r24
+  8c:	02 c0       	rjmp	.+4      	; 0x92 <main+0x1c>
+  8e:	22 0f       	add	r18, r18
+  90:	33 1f       	adc	r19, r19
+  92:	0a 94       	dec	r0
+  94:	e2 f7       	brpl	.-8      	; 0x8e <main+0x18>
+  96:	92 2b       	or	r25, r18
+  98:	92 bb       	out	0x12, r25	; 18
+			
+			if(state == 4)
+  9a:	84 30       	cpi	r24, 0x04	; 4
+  9c:	69 f4       	brne	.+26     	; 0xb8 <main+0x42>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  9e:	4f e7       	ldi	r20, 0x7F	; 127
+  a0:	5b e8       	ldi	r21, 0x8B	; 139
+  a2:	98 e0       	ldi	r25, 0x08	; 8
+  a4:	41 50       	subi	r20, 0x01	; 1
+  a6:	50 40       	sbci	r21, 0x00	; 0
+  a8:	90 40       	sbci	r25, 0x00	; 0
+  aa:	e1 f7       	brne	.-8      	; 0xa4 <main+0x2e>
+  ac:	00 c0       	rjmp	.+0      	; 0xae <main+0x38>
+  ae:	00 00       	nop
+			{
+				_delay_ms(350);
+				CLR_BIT(PORTD,state);
+  b0:	92 b3       	in	r25, 0x12	; 18
+  b2:	20 95       	com	r18
+  b4:	29 23       	and	r18, r25
+  b6:	22 bb       	out	0x12, r18	; 18
+			}
+			
+			//Update state
+			state--;
+  b8:	81 50       	subi	r24, 0x01	; 1
+  ba:	02 c0       	rjmp	.+4      	; 0xc0 <main+0x4a>
+		} 
+		else
+		{
+			//Reset all LEDS and Buzzer
+			PORTD = 0;
+  bc:	12 ba       	out	0x12, r1	; 18
+			//Reset state
+			state = 7;
+  be:	87 e0       	ldi	r24, 0x07	; 7
+		}
+		
+		//Trap processor until button is unpressed
+		while( GET_BIT(PIND,0) == 1 );
+  c0:	80 99       	sbic	0x10, 0	; 16
+  c2:	fe cf       	rjmp	.-4      	; 0xc0 <main+0x4a>
+  c4:	2f ef       	ldi	r18, 0xFF	; 255
+  c6:	30 e7       	ldi	r19, 0x70	; 112
+  c8:	42 e0       	ldi	r20, 0x02	; 2
+  ca:	21 50       	subi	r18, 0x01	; 1
+  cc:	30 40       	sbci	r19, 0x00	; 0
+  ce:	40 40       	sbci	r20, 0x00	; 0
+  d0:	e1 f7       	brne	.-8      	; 0xca <main+0x54>
+  d2:	00 c0       	rjmp	.+0      	; 0xd4 <main+0x5e>
+  d4:	00 00       	nop
+  d6:	d2 cf       	rjmp	.-92     	; 0x7c <main+0x6>
+
+000000d8 <_exit>:
+  d8:	f8 94       	cli
+
+000000da <__stop_program>:
+  da:	ff cf       	rjmp	.-2      	; 0xda <__stop_program>
