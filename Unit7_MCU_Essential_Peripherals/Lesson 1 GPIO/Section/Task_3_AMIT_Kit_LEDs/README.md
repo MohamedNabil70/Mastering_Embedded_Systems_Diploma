@@ -1,0 +1,1 @@
+<img align="center" alt="Simulation" width="800" src="https://github.com/MohamedNabil70/Mastering_Embedded_Systems_Diploma/blob/main/Unit7_MCU_Essential_Peripherals/Lesson%201%20GPIO/Section/Task_3_AMIT_Kit_LEDs/Task_3_AMIT_Kit_LEDs.gif">
