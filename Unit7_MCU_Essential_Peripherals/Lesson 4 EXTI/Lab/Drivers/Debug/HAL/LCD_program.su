@@ -1,0 +1,12 @@
+LCD_program.c:20:6:delay_ms	24	static
+LCD_program.c:30:6:LCD_setPinDirections	16	static
+LCD_program.c:104:6:LCD_init	8	static
+LCD_program.c:134:6:LCD_sendCmnd	16	static
+LCD_program.c:167:6:LCD_sendChar	16	static
+LCD_program.c:201:13:writeHalfPort	16	static
+LCD_program.c:233:6:LCD_sendString	24	static
+LCD_program.c:248:6:LCD_typeString	24	static
+LCD_program.c:265:6:LCD_writeNumber	24	static
+LCD_program.c:289:6:LCD_clear	8	static
+LCD_program.c:296:6:LCD_shift	16	static
+LCD_program.c:310:6:LCD_goToSpecificPosition	16	static
