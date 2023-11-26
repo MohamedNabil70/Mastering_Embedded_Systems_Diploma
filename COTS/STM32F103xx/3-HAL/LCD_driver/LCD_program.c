@@ -8,8 +8,11 @@
 
 
 /* HAL */
-#include "LCD_interface.h"
-#include "LCD_config.h"
+#include "../inc/LCD_config.h"
+#include "../inc/LCD_interface.h"
+
+
+static void writeHalfPort(uint8_t value);
 
 
 /*MAIN Functions*/

@@ -7,8 +7,19 @@
  *   This is GPIO Peripheral driver for STM32F103x8 MCU according to LQFP48 Package Specifications
  */
 
-#include "STM32F103x8.h"
-#include "STM32F103x8_GPIO_driver.h"
+#include "../STM32F103C8_Drivers/inc/STM32F103x8_GPIO_driver.h"
+
+#include "../STM32F103C8_Drivers/inc/STM32F103x8.h"
+
+
+
+
+/*
+ * =============================================================================
+ * 								Generic Functions
+ * =============================================================================
+ */
+
 
 uint8_t Get_CRLH_Position(uint16_t PinNumber){
 
@@ -69,6 +80,18 @@ uint8_t Get_CRLH_Position(uint16_t PinNumber){
 
 	return 0;
 }
+
+
+/*
+ * =============================================================================
+ * 							API Functions Definitions
+ * =============================================================================
+ */
+
+
+
+
+
 
 /**===============================================================================================
  * @FName			- MCAL_GPIO_Init

@@ -14,7 +14,7 @@
 //-----------------------------
 //Includes
 //-----------------------------
-#include "STM32F103x8.h"
+#include "../../STM32F103C8_Drivers/inc/STM32F103x8.h"
 
 //-----------------------------
 //User type definitions (structures)
@@ -23,14 +23,14 @@
 //pinConfigure type
 typedef struct{
 
-	uint16_t GPIO_PinNumber; // Specifies the GPIO pins to be configured.
-							// This parameter must be a value of @ref GPIO_PINS_define
+	uint16_t GPIO_PinNumber;	 // Specifies the GPIO pins to be configured.
+								// This parameter must be a value of @ref GPIO_PINS_define
 
-	uint8_t GPIO_Mode;   // Specifies the operating mode for the selected pins
-						// This parameter can be a value of @ref GPIO_MODE_define
+	uint8_t GPIO_Mode;  		// Specifies the operating mode for the selected pins
+								// This parameter can be a value of @ref GPIO_MODE_define
 
-	uint8_t GPIO_Output_Speed; // Specifies the speed for the selected pins
-							  // This parameter can be a value of @ref GPIO_SPEED_define
+	uint8_t GPIO_Output_Speed;	 // Specifies the speed for the selected pins
+							  	 // This parameter can be a value of @ref GPIO_SPEED_define
 
 }GPIO_PinConfig_t;
 

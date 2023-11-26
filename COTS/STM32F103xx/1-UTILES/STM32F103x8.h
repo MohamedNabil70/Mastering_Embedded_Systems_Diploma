@@ -35,6 +35,14 @@
 ** Base Addresses for SYSTEM BUS Peripherals *
 **-------------------------------------------*/
 
+//NVIC Register Map
+#define NVIC_BASE				(0XE000E100UL)
+#define NVIC_ISER0				*(volatile uint32_t*)( NVIC_BASE + 0X00 )
+#define NVIC_ISER1				*(volatile uint32_t*)( NVIC_BASE + 0X04 )
+#define NVIC_ISER2				*(volatile uint32_t*)( NVIC_BASE + 0X08 )
+#define NVIC_ICER0				*(volatile uint32_t*)( NVIC_BASE + 0X80 )
+#define NVIC_ICER1				*(volatile uint32_t*)( NVIC_BASE + 0X84 )
+#define NVIC_ICER2				*(volatile uint32_t*)( NVIC_BASE + 0X88 )
 
 //-----------------------------
 //Base Addresses for AHP BUS Peripherals
@@ -68,9 +76,15 @@
 //EXTI
 #define EXTI_BASE 								0X40010400UL
 
+
+#define USART1_BASE 							0X40013800UL
+
 //-----------------------------
 //Base Addresses for APB1 BUS Peripherals
 //-----------------------------
+
+#define USART2_BASE 							0X40004400UL
+#define USART3_BASE 							0X40004800UL
 
 
 /*************************************************************************************/
@@ -122,10 +136,7 @@ typedef struct {
 
 	volatile uint32_t EVCR		;
 	volatile uint32_t MAPR		;
-	volatile uint32_t EXTICR1	;
-	volatile uint32_t EXTICR2	;
-	volatile uint32_t EXTICR3	;
-	volatile uint32_t EXTICR4	;
+	volatile uint32_t EXTICR[4]	;
 	volatile uint32_t RESERVED0	;
 	volatile uint32_t MAPR2		;
 
@@ -145,6 +156,25 @@ typedef struct {
 	volatile uint32_t PR	;
 
 }EXTI_t;
+
+
+//-*-*-*-*-*-*-*-*-*-*-*-
+//Peripheral registers: USART
+//-*-*-*-*-*-*-*-*-*-*-*
+
+
+typedef struct {
+
+	volatile uint32_t SR	;
+	volatile uint32_t DR	;
+	volatile uint32_t BRR	;
+	volatile uint32_t CR1	;
+	volatile uint32_t CR2	;
+	volatile uint32_t CR3	;
+	volatile uint32_t GTPR	;
+
+}USART_t;
+
 
 //-*-*-*-*-*-*-*-*-*-*-*-
 //Peripheral registers:
@@ -183,11 +213,16 @@ typedef struct {
 #define EXTI			((EXTI_t *)EXTI_BASE)
 
 
+#define USART1			((USART_t *)USART1_BASE)
+#define USART2			((USART_t *)USART2_BASE)
+#define USART3			((USART_t *)USART3_BASE)
+
+
 
 /*************************************************************************************/
 
 //-*-*-*-*-*-*-*-*-*-*-*-
-//clock enable Macros:
+//Clock Enable Macros:
 //-*-*-*-*-*-*-*-*-*-*-*
 
 #define RCC_AFIO_CLK_EN()   (RCC->APB2ENR |= (1<<0))
@@ -198,9 +233,78 @@ typedef struct {
 #define RCC_GPIOD_CLK_EN()   (RCC->APB2ENR |= (1<<5))
 #define RCC_GPIOE_CLK_EN()   (RCC->APB2ENR |= (1<<6))
 
+//USART Clock Enable
+#define RCC_USART1_CLK_EN()   (RCC->APB2ENR |= (1<<14))
+#define RCC_USART2_CLK_EN()   (RCC->APB1ENR |= (1<<17))
+#define RCC_USART3_CLK_EN()   (RCC->APB1ENR |= (1<<18))
+
+
+//USART Clock RESET
+#define RCC_USART1_CLK_RESET()   (RCC->APB2RSTR |= (1<<14))
+#define RCC_USART2_CLK_RESET()   (RCC->APB1RSTR |= (1<<17))
+#define RCC_USART3_CLK_RESET()   (RCC->APB1RSTR |= (1<<18))
 
 
 /*************************************************************************************/
+
+
+//-*-*-*-*-*-*-*-*-*-*-*-
+//IVT Macros:
+//-*-*-*-*-*-*-*-*-*-*-*
+
+#define EXTI0_IRQ		6
+#define EXTI1_IRQ		7
+#define EXTI2_IRQ		8
+#define EXTI3_IRQ		9
+#define EXTI4_IRQ		10
+#define EXTI5_IRQ		23
+#define EXTI6_IRQ		23
+#define EXTI7_IRQ		23
+#define EXTI8_IRQ		23
+#define EXTI9_IRQ		23
+#define EXTI10_IRQ		40
+#define EXTI11_IRQ		40
+#define EXTI12_IRQ		40
+#define EXTI13_IRQ		40
+#define EXTI14_IRQ		40
+#define EXTI15_IRQ		40
+
+#define USART1_IRQ		37
+#define USART2_IRQ		38
+#define USART3_IRQ		39
+
+
+//-*-*-*-*-*-*-*-*-*-*-*-
+//NVIC IRQ Enable Macros:
+//-*-*-*-*-*-*-*-*-*-*-*
+
+//EXTI
+#define NVIC_IRQ6_EXTI0_ENABLE()				(NVIC_ISER0 |= 1<<6)
+#define NVIC_IRQ7_EXTI1_ENABLE()				(NVIC_ISER0 |= 1<<7)
+#define NVIC_IRQ8_EXTI2_ENABLE()				(NVIC_ISER0 |= 1<<8)
+#define NVIC_IRQ9_EXTI3_ENABLE()				(NVIC_ISER0 |= 1<<9)
+#define NVIC_IRQ10_EXTI4_ENABLE()				(NVIC_ISER0 |= 1<<10)
+#define NVIC_IRQ23_EXTI5_9_ENABLE()				(NVIC_ISER0 |= 1<<23)
+#define NVIC_IRQ40_EXTI10_15_ENABLE()			(NVIC_ISER1 |= 1<<8)  //40-32 = 8
+
+
+#define NVIC_IRQ6_EXTI0_DISABLE()				(NVIC_ICER0 |= 1<<6)
+#define NVIC_IRQ7_EXTI1_DISABLE()				(NVIC_ICER0 |= 1<<7)
+#define NVIC_IRQ8_EXTI2_DISABLE()				(NVIC_ICER0 |= 1<<8)
+#define NVIC_IRQ9_EXTI3_DISABLE()				(NVIC_ICER0 |= 1<<9)
+#define NVIC_IRQ10_EXTI4_DISABLE()				(NVIC_ICER0 |= 1<<10)
+#define NVIC_IRQ23_EXTI5_9_DISABLE()			(NVIC_ICER0 |= 1<<23)
+#define NVIC_IRQ40_EXTI10_15_DISABLE()			(NVIC_ICER1 |= 1<<8)  //40-32 = 8
+
+
+//USART
+#define NVIC_IRQ37_USART1_ENABLE()				(NVIC_ISER1 |= 1<<(USART1_IRQ - 32))  //37-32
+#define NVIC_IRQ38_USART2_ENABLE()				(NVIC_ISER1 |= 1<<(USART2_IRQ - 32))  //38-32
+#define NVIC_IRQ39_USART3_ENABLE()				(NVIC_ISER1 |= 1<<(USART3_IRQ - 32))  //39-32
+
+#define NVIC_IRQ37_USART1_DISABLE()				(NVIC_ICER1 |= 1<<(USART1_IRQ - 32))  //37-32
+#define NVIC_IRQ38_USART2_DISABLE()				(NVIC_ICER1 |= 1<<(USART2_IRQ - 32))  //38-32
+#define NVIC_IRQ39_USART3_DISABLE()				(NVIC_ICER1 |= 1<<(USART3_IRQ - 32))  //39-32
 
 
 //-*-*-*-*-*-*-*-*-*-*-*-

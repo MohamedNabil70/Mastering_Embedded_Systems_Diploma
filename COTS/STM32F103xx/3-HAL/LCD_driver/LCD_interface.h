@@ -14,11 +14,9 @@
 //-----------------------------
 
 /*UTILS*/
-#include "BIT_MATH.h"
-
-/* MCAL */
-#include "STM32F103x8.h"
-#include "STM32F103x8_GPIO_driver.h"
+#include "../../STM32F103C8_Drivers/inc/BIT_MATH.h"
+#include "../../STM32F103C8_Drivers/inc/STM32F103x8.h"
+#include "../../STM32F103C8_Drivers/inc/STM32F103x8_GPIO_driver.h"
 
 //-----------------------------
 //Macros Configuration References
@@ -43,7 +41,6 @@ void LCD_init(void);
 void LCD_sendCmnd(uint8_t cmnd);
 void LCD_sendChar(uint8_t data);
 
-static void writeHalfPort(uint8_t value);
 
 //OTHER Functions
 void LCD_sendString(char* data);

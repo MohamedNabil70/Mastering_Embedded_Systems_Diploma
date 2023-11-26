@@ -14,8 +14,8 @@
 //-----------------------------
 
 /* MCAL */
-#include "STM32F103x8.h"
-#include "STM32F103x8_GPIO_driver.h"
+#include "../../STM32F103C8_Drivers/inc/STM32F103x8.h"
+#include "../../STM32F103C8_Drivers/inc/STM32F103x8_GPIO_driver.h"
 
 //-----------------------------
 //Macros Configuration References

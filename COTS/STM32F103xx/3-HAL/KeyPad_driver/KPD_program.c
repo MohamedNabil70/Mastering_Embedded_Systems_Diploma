@@ -7,8 +7,8 @@
 
 
 /* HAL */
-#include "KPD_config.h"
-#include "KPD_interface.h"
+#include "../inc/KPD_config.h"
+#include "../inc/KPD_interface.h"
 
 
 
@@ -25,7 +25,7 @@ void KPD_init(void)
 	GPIO_PinConfig_t PinCfg;
 
 
-	//Rows Pins Config [Input with pull-down resistance]
+	//Rows Pins Config [Input with pull-up resistance]
 
 		PinCfg.GPIO_PinNumber = KPD_ROW0_PIN;
 		PinCfg.GPIO_Mode = GPIO_MODE_INPUT_PD;
